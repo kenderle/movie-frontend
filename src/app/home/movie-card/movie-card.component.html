@@ -10,15 +10,15 @@
         <img class="img img-fluid" [src]="movieImg" (error)="setDefaultPic()" />
       </div>
     </div>
-      <div class="movie-info w-100 d-inline-flex">
-        <div class="flex">
-          <p>Rating: <span class="ml-2">{{movie.parental_rating}}</span></p>
-        </div>
-        <div class="flex ml-5">
-          <p>Duration: <span class="ml-2">{{movie.duration}} min.</span></p>
-        </div>
-        <div class="flex ml-5">
-          <p>Total Gross: <span class="ml-2">{{movie.total_gross | currency}}</span></p>
-        </div>
+    <div class="movie-info w-100 d-inline-flex">
+      <div class="flex">
+        <p>Rating: <span class="ml-2">{{movie.parental_rating}}</span></p>
+      </div>
+      <div class="flex ml-5">
+        <p>Duration: <span class="ml-2">{{movie.duration}} min.</span></p>
+      </div>
+      <div class="flex ml-5">
+        <p>Total Gross: <span class="ml-2">{{movie.total_gross | currency}}</span></p>
       </div>
     </div>
+  </div>

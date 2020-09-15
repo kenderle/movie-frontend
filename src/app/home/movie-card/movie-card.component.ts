@@ -21,7 +21,7 @@ movieImg: string
   }
 
   setDefaultPic() {
-    this.movieImg = 'assets/images/batman-vs-godzilla.png'
+    this.movieImg = 'assets/images/placeholder.png'
   }
 
 }
