@@ -67,7 +67,7 @@
           <label class="label">Password</label>
           <input [ngClass]="{'is-invalid': hasError && form.get('passwordConfirmation').errors}" class="form-control"
             type="password" formControlName="passwordConfirmation" placeholder="xxxxxxxxx">
-          <label class="form-error" *ngIf="hasError && form.get('passwordConfirmation').errors['required']">
+          <label class="form-error" *ngIf="hasError && form.get('passwordConfirmation').errors">
             <span class="text-danger">
               Password Confirmation is required!
             </span>
