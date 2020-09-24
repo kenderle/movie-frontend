@@ -1,6 +1,10 @@
+import { UserService } from './../shared/services/user.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from './must-match.validator';
+import { Subscription } from 'rxjs';
+import { User } from '../shared/models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,14 +18,19 @@ export class SignupComponent implements OnInit, OnDestroy {
   submitting = false
   hasError = false
   errorMsg: string
+  currentUser: User
+  private subs = new Subscription
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.createFormControls()
     this.createForm()
   }
+
 
   createFormControls() {
     this.formValues = {
@@ -53,6 +62,30 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.submitting = false
       return
     }
+    const form = this.form.value
+    const params = {
+      first_name: form.firstName,
+      last_name: form.lastName,
+      nickname: form.nickName,
+      email: form.email,
+      password: form.password,
+      password_confirmation: form.passwordConfirmation
+    }
+    this.subs.add(
+      this.userService.signup(params).subscribe(data => {
+        if (data && data.success && data.user) {
+          this.currentUser = data.user
+          this.submitting = false
+          this.router.navigate(['/home'])
+        }
+      }, error => {
+        if (error) {
+          console.log(error)
+          this.submitting = false
+          this.errorMsg = 'User already exists in this system! Please login!'
+        }
+      })
+    )
   }
 
   cancelForm() {
@@ -60,6 +93,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    this.subs.unsubscribe()
   }
 }

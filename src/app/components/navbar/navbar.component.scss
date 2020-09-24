@@ -1,37 +1,100 @@
-.navbar{
-  height: 85px;
-  background: #222222 0% 0% no-repeat padding-box !important;
-  box-shadow: 0px 3px 19px #00000041;
-  .nav-link {
-    color: white !important;
-    text-transform: uppercase;
+
+
+  .navbar {
+    height: 85px;
+    background-color: #222222 !important;
+    box-shadow: 0px 3px 19px #00000041;
   }
-}
 
-.btn-flix-navbar {
-  border-color: #ff4436;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 25px;
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-family: Raleway !important;
-}
+  li {
+    cursor: pointer;
+  }
 
-.btn-flix-navbar:hover,
-.btn-flix-navbar:not(:disabled):not(.disabled):active {
-  border-width: 3px;;
-  background: transparent !important;
-  border-color: #ff4436;
-}
+  .btn-flix-navbar {
+    border-color: #FF4436;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 25px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Raleway';
+  }
 
-.text-flix-red {
-  color: #ff4436;
-}
+  .btn-flix-navbar:hover,
+  .btn-flix-navbar:not(:disabled):not(.disabled):active {
+    border-width: 3px;
+    background: transparent !important;
+    border-color: #FF4436;
+  }
 
-.vl-red:after {
-  content: '|';
-  color: #ff4436;
-  height: 20px;
-}
+  .text-flix-red {
+    color: #FF4436;
+  }
+
+  .center-navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+  }
+
+  .vl-red::after {
+      content: '|';
+      color: #FF4436;
+      height: 20px;
+  }
+  .circle-container {
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.6em;
+    background: #FF4436;
+  }
+
+  .nav-link {
+    font-family: 'Raleway';
+    font-weight: bold;
+    font-size: 16px;
+    a {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .navbar {
+      padding-right: 8px;
+      height: auto;
+    }
+    .navbar-brand {
+      img {
+        max-width: 100px;
+      }
+    }
+    .nav-link {
+      font-size: 14px;
+      a {
+        font-size: 14px;
+      }
+    }
+    .nav-item.icon {
+      font-size: 18px;
+      margin-top: 0.5em;
+      margin-right: 0.5em;
+      width: 30px;
+    }
+    .nav-item.small {
+      margin-top: 0.5em;
+      margin-right: 0.5em;
+      a {
+        padding: 2px;
+        padding-top: 12px;
+      }
+    }
+    .ml-small-20 {
+      margin-left: 20px;
+    }
+    .ml-small-10 {
+      margin-left: 10px;
+    }
+  }
+
