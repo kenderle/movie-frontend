@@ -20,6 +20,12 @@ import { MovieCardComponent } from './home/movie-card/movie-card.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { SingleMovieComponent } from './movies/single-movie/single-movie.component';
+import { InputStarRatingComponent } from './movies/input-star-rating/input-star-rating.component';
+import { MoviesReviewCardComponent } from './movies-review-card/movies-review-card.component';
+import { TimeAgoPipe } from './shared/pipes/time-ago.pipe';
+import { MovieReviewsComponent } from './movies/movie-reviews/movie-reviews.component';
+import { SingleReviewCardComponent } from './movies/single-review-card/single-review-card.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     MovieCardComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    SingleMovieComponent,
+    InputStarRatingComponent,
+    MoviesReviewCardComponent,
+    TimeAgoPipe,
+    MovieReviewsComponent,
+    SingleReviewCardComponent
   ],
   imports: [
     BrowserModule,
