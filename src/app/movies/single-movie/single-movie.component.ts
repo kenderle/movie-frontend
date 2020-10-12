@@ -18,7 +18,7 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
   movie: Movie
   movieImg: string
   reviews: Review[]
-  avgMovieRating = 5.0
+  avgMovieRating = 0.0
   currentUser: User
   private subs = new Subscription()
 

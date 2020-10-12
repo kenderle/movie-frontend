@@ -33,6 +33,7 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.subscribe(movie => {
       if (movie && movie.id) {
+        this.retrieveMovie(movie.id)
 
       }
     })
@@ -42,23 +43,25 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe()
   }
 
-  retrieveMovieById(id: number) {
-    const params = {
-      id: id
-    }
+  retrieveMovie(id: number) {
+    const params = { id: id }
     this.subs.add(
       this.movieService.getMovieById(params).subscribe(data => {
-        if (data && data.movie && data.reviews) {
-          this.movie = new Movie(data.movie)
-          this.movieImg = this.movie.image
-          this.reviews = data.reviews.map(x => new Review(x))
-          if (this.reviews.length) {
+        if (data) {
+          console.log(data)
+          this.movie = new Movie(data.movie) // map the return json movie to the movie model
+          this.movieImg = this.movie.image // assign the movieImg
+          if (data && data.reviews && data.reviews.length) { // check if there are reviews in the return json
+            this.reviews = data.reviews.map(x => new Review(x)) // if there are reviews... model them out
             this.computeTheAverageReviewRating(this.reviews)
+          } else {
+            this.reviews = [] // else set the reviews as empty
+            this.avgMovieRating = 0.0
           }
         }
       }, error => {
         if (error) {
-          console.log(error)
+          console.error(error)
         }
       })
     )
@@ -78,6 +81,7 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
   }
 
   routeToWriteReview() {
+    this.router.navigate(['/reviews/' + this.movie.id + '/new'])
 
   }
 
