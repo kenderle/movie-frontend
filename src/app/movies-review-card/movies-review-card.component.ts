@@ -34,7 +34,7 @@ export class MoviesReviewCardComponent implements OnInit, OnChanges {
     if (this.reviews && this.reviews.length) {
       this.firstReview = this.reviews[0]
       this.reviewCount = this.reviews.length
-      if (this.reviewCount > 1) {
+      if (this.reviewCount === 1) {
         this.reviewCountString = `${this.reviewCount} review`
       } else {
         this.reviewCountString = `${this.reviewCount} reviews`

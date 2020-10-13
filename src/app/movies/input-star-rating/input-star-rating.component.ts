@@ -21,11 +21,21 @@ export class InputStarRatingComponent implements OnInit {
     }
   }
 
+  showIconStar(index: number) {
+    if (this.rating >= index + .5) {
+      return 'fas'
+    }else {
+      return 'far'
+    }
+  }
   showIcon(index: number) {
     if (this.rating >= index + 1) {
       return 'star'
-    } else {
+    } else if (this.rating >= index + .5) {
       return 'star-half-alt'
+    } else {
+      (this.rating < index + .5)
+      return 'star'
     }
   }
 

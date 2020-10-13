@@ -39,10 +39,6 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
-    this.subs.unsubscribe()
-  }
-
   retrieveMovie(id: number) {
     const params = { id: id }
     this.subs.add(
@@ -82,7 +78,10 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
 
   routeToWriteReview() {
     this.router.navigate(['/reviews/' + this.movie.id + '/new'])
+  }
 
+  ngOnDestroy() {
+    this.subs.unsubscribe()
   }
 
 }
