@@ -77,7 +77,7 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
   }
 
   routeToWriteReview() {
-    this.router.navigate(['/reviews/' + this.movie.id + '/new'])
+    this.router.navigate([`reviews/${this.movie.id}/new`])
   }
 
   ngOnDestroy() {
