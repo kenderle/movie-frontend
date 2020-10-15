@@ -72,7 +72,7 @@ export class AppModule {
     private library: FaIconLibrary
   ) {
     this.library.addIcons(
-      faSpinner, faAngleLeft, faAngleRight, faPlus, farStar, fasStar, faStarHalfAlt, faArrowRight, faUpload, faVideo,
+      faSpinner, faAngleLeft, faAngleRight, faPlus, fasStar, farStar, faStarHalfAlt, faArrowRight, faUpload, faVideo,
       faEdit, faPen, faTrashAlt, faSearch, faUser, faKey, faEye, faEyeSlash, faSignInAlt, faSignOutAlt, faUserPlus, faCircle
     )
   }
