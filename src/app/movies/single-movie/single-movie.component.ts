@@ -4,7 +4,7 @@ import { Review } from './../../shared/models/review';
 import { Movie } from './../../shared/models/movie';
 import { MovieService } from './../../shared/services/movie.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
 
@@ -25,10 +25,11 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.currentUser = this.userService.currentUserValue
-   }
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(movie => {
@@ -66,7 +67,7 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
     reviews.forEach(x => {
       totalRating += x.rating
     })
-    this.avgMovieRating = ( totalRating / totalReviews )
+    this.avgMovieRating = (totalRating / totalReviews)
   }
 
   setDefaultPic() {
@@ -74,7 +75,7 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
   }
 
   routeToWriteReview() {
-
+    this.router.navigate([`reviews/${this.movie.id}/new`])
   }
 
   editMovie() {

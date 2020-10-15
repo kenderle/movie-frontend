@@ -28,6 +28,7 @@ import { MoviesReviewCardComponent } from './movies-review-card/movies-review-ca
 import { TimeAgoPipe } from './shared/pipes/time-ago.pipe';
 import { MovieReviewsComponent } from './movies/movie-reviews/movie-reviews.component';
 import { SingleReviewCardComponent } from './movies/single-review-card/single-review-card.component';
+import { AddEditReviewComponent } from './reviews/add-edit-review/add-edit-review.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SingleReviewCardComponent } from './movies/single-review-card/single-re
     MoviesReviewCardComponent,
     TimeAgoPipe,
     MovieReviewsComponent,
-    SingleReviewCardComponent
+    SingleReviewCardComponent,
+    AddEditReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,7 @@ export class AppModule {
     private library: FaIconLibrary
   ) {
     this.library.addIcons(
-      faSpinner, faAngleLeft, faAngleRight, faPlus, farStar, fasStar, faStarHalfAlt, faArrowRight, faUpload, faVideo,
+      faSpinner, faAngleLeft, faAngleRight, faPlus, fasStar, farStar, faStarHalfAlt, faArrowRight, faUpload, faVideo,
       faEdit, faPen, faTrashAlt, faSearch, faUser, faKey, faEye, faEyeSlash, faSignInAlt, faSignOutAlt, faUserPlus, faCircle
     )
   }
