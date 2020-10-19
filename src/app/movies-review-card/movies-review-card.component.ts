@@ -32,7 +32,7 @@ export class MoviesReviewCardComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.reviews && this.reviews.length) {
-      this.firstReview = this.reviews[0]
+      this.firstReview = this.reviews[Math.floor(Math.random() * this.reviews.length)]
       this.reviewCount = this.reviews.length
       if (this.reviewCount === 1) {
         this.reviewCountString = `${this.reviewCount} review`

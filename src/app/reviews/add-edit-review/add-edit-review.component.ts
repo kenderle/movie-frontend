@@ -20,7 +20,9 @@ export class AddEditReviewComponent implements OnInit, OnDestroy {
   formValues: any
   submitting = false
   hasError = false
+  hasAltError = false
   errorMsg: string
+  alterrorMsg: string
   currentUser: User
   movie: Movie
   movieImg: string
@@ -34,7 +36,7 @@ export class AddEditReviewComponent implements OnInit, OnDestroy {
   ]
   isNew = false
   isEdit = false
-  private subs = new Subscription
+  private subs = new Subscription()
 
   constructor(
     private router: Router,
@@ -53,97 +55,105 @@ export class AddEditReviewComponent implements OnInit, OnDestroy {
     this.createForm()
   }
 
-handleSubs() {
-  this.route.params.subscribe(data => {
-    if (data && data.id) {
-      this.retrieveMovie(data.id)
-    }
-  })
-}
-
-retrieveMovie(id: number) {
-  const params = { id: id }
-  this.subs.add(
-    this.movieSerivce.getMovieById(params).subscribe(data => {
-      if (data && data.movie) {
-        this.movie = data.movie
-        if (this.movie.image) {
-          this.movieImg = this.movie.image
-        } else {
-          this.movieImg = null
-        }
-      }
-    }, error => {
-      if (error) {
-        console.error(error)
+  handleSubs() {
+    this.route.params.subscribe(data => {
+      if (data && data.id) {
+        this.retrieveMovie(data.id)
       }
     })
-  )
-}
-
-createFormControls() {
-  this.formValues = {
-    starRating: [null, Validators.required],
-    body: ['', Validators.required]
   }
-}
 
-createForm() {
-  this.form = this.fb.group(this.formValues)
-}
-
-setDefaultPic() {
-  this.movieImg = 'assets/images/placeholder.png'
-}
-
-submitForm() {
-  this.hasError = false
-  this.submitting = true
-  if (this.form.invalid) {
-    this.hasError = true
-    this.submitting = false
-    return
-  }
-  const form = this.form.value
-  const params = {
-    user_id: this.currentUser.id,
-    movie_id: this.movie.id,
-    user_nickname: this.currentUser.nickname,
-    rating: form.starRating,
-    body: form.body
-  }
-  this.subs.add(
-    this.reviewService.createReview(params).subscribe(data => {
-      if (data) {
-        this.submitting = false
-        Swal.fire(
-          {
-            icon: 'success',
-            title: 'A new review has been successfully added!',
-            showConfirmButton: false,
-            timer: 2000
+  retrieveMovie(id: number) {
+    const params = { id: id }
+    this.subs.add(
+      this.movieSerivce.getMovieById(params).subscribe(data => {
+        if (data && data.movie) {
+          this.movie = data.movie
+          if (this.movie.image) {
+            this.movieImg = this.movie.image
+          } else {
+            this.movieImg = null
           }
-        ).then(() => {
-          this.form.reset()
-        })
-      }
-    }, error => {
-      if (error) {
-        console.error(error)
-        this.submitting = false
-        this.hasError = true
-        this.errorMsg = 'Something went wrong while trying to create a review.'
-      }
-    })
-  )
-}
+        }
+      }, error => {
+        if (error) {
+          console.error(error)
+        }
+      })
+    )
+  }
 
-cancel() {
-  this.form.reset()
-}
+  setDefaultPic() {
+    this.movieImg = 'assets/images/placeholder.png'
+  }
 
-ngOnDestroy() {
-  this.subs.unsubscribe()
-}
+  createFormControls() {
+    this.hasError = false
+    this.hasAltError = false
+    this.formValues = {
+      starRating: [null, Validators.required],
+      body: ['', Validators.required, Validators.minLength(25)]
+    }
+  }
+
+  createForm() {
+    this.form = this.fb.group(this.formValues)
+  }
+
+  submitForm() {
+    this.hasError = false
+    this.submitting = true
+    if (this.formValues.body.length < 25) {
+      this.hasError = true
+      this.submitting = false
+      this.errorMsg = "Review must be at least 25 characters long."
+      return
+    }
+    if (this.form.invalid) {
+      this.hasError = true
+      this.submitting = false
+      return
+    }
+    const form = this.form.value
+    const params = {
+      user_id: this.currentUser.id,
+      movie_id: this.movie.id,
+      user_nickname: this.currentUser.nickname,
+      rating: form.starRating,
+      body: form.body
+    }
+    this.subs.add(
+      this.reviewService.createReview(params).subscribe(data => {
+        if (data) {
+          this.submitting = false
+          Swal.fire(
+            {
+              icon: 'success',
+              title: 'You\'re a bonafide movie critic!!!',
+              showConfirmButton: false,
+              timer: 2000
+            }
+          ).then(() => {
+            this.router.navigate([`./movies/${this.movie.id}/reviews`])
+          })
+        }
+      }, error => {
+        if (error) {
+          console.error(error)
+          this.submitting = false
+          this.hasError = true
+          this.errorMsg = 'Something went wrong while trying to create a review.'
+        }
+      })
+    )
+  }
+
+  cancel() {
+    this.router.navigate([`./movies/${this.movie.id}`])
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe()
+  }
 
 }

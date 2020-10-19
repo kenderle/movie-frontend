@@ -1,3 +1,4 @@
+import { NewMovieComponent } from './movies/new-movie/new-movie.component';
 import { AddEditReviewComponent } from './reviews/add-edit-review/add-edit-review.component';
 import { MovieReviewsComponent } from './movies/movie-reviews/movie-reviews.component';
 import { SingleMovieComponent } from './movies/single-movie/single-movie.component';
@@ -29,6 +30,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'Movies/new',
+    component: NewMovieComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'movies/:id',
     component: SingleMovieComponent,
     pathMatch: 'full'
@@ -43,6 +49,7 @@ const routes: Routes = [
     component: AddEditReviewComponent,
     pathMatch: 'full'
   }
+
 ];
 
 @NgModule({

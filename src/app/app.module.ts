@@ -14,7 +14,7 @@ import {
   faSpinner, faAngleLeft, faAngleRight, faPlus, faStar as fasStar, faStarHalfAlt, faArrowRight, faUpload, faVideo,
   faEdit, faPen, faTrashAlt, faSearch, faUser, faKey, faEye, faEyeSlash, faSignInAlt, faSignOutAlt, faUserPlus, faCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -29,6 +29,8 @@ import { TimeAgoPipe } from './shared/pipes/time-ago.pipe';
 import { MovieReviewsComponent } from './movies/movie-reviews/movie-reviews.component';
 import { SingleReviewCardComponent } from './movies/single-review-card/single-review-card.component';
 import { AddEditReviewComponent } from './reviews/add-edit-review/add-edit-review.component';
+import { NewMovieComponent } from './movies/new-movie/new-movie.component';
+import {ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { AddEditReviewComponent } from './reviews/add-edit-review/add-edit-revie
     TimeAgoPipe,
     MovieReviewsComponent,
     SingleReviewCardComponent,
-    AddEditReviewComponent
+    AddEditReviewComponent,
+    NewMovieComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { AddEditReviewComponent } from './reviews/add-edit-review/add-edit-revie
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ImageCropperModule
   ],
   providers: [
     MovieService,
