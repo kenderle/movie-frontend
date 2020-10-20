@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MovieService } from './../../shared/services/movie.service';
 import { UserService } from './../../shared/services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -20,13 +21,14 @@ export class NewMovieComponent implements OnInit, OnDestroy {
   hasError = false
   errorMsg: string
   currentUser: User
+  router: Router
   // Static movie ratings list
   movieRatings = [
-    { id: 1, val: "G" },
-    { id: 2, val: "PG" },
-    { id: 3, val: "PG-13" },
-    { id: 4, val: "R" },
-    { id: 5, val: "NC-17" }
+    { id: 1, val: 'G' },
+    { id: 2, val: 'PG' },
+    { id: 3, val: 'PG-13' },
+    { id: 4, val: 'R' },
+    { id: 5, val: 'NC-17' }
   ]
   // s3 Keys
   accessKey: string
@@ -65,8 +67,7 @@ export class NewMovieComponent implements OnInit, OnDestroy {
         if (error) {
           console.error(error)
         }
-      }
-      )
+      })
     )
   }
 
@@ -104,7 +105,7 @@ export class NewMovieComponent implements OnInit, OnDestroy {
       const params = {
         title: form.title,
         description: form.description,
-        rating: 0,
+        rating: 5,
         parental_rating: form.rating,
         releaseDate: releaseDate,
         year: year,
@@ -124,9 +125,8 @@ export class NewMovieComponent implements OnInit, OnDestroy {
               showConfirmButton: false,
               timer: 2000
             }).then(() => {
-              this.form.reset()
+              this.router.navigate([`./home/`]);
             })
-
           }
         }, error => {
           if (error) {
@@ -135,8 +135,7 @@ export class NewMovieComponent implements OnInit, OnDestroy {
             this.hasError = true
             this.errorMsg = "Something went wrong while trying to create that movie!"
           }
-        }
-        )
+        })
       )
     } else {
       this.submitting = false

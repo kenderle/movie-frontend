@@ -30,7 +30,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'Movies/new',
+    path: 'movies/new',
     component: NewMovieComponent,
     pathMatch: 'full'
   },
