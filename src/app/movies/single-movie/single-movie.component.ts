@@ -111,10 +111,10 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
   }
 
   deleteMovie(id: number) {
-    const movieId = typeof this.movie === 'number' ? this.movie : this.movie.id;
-    const url = `${this.movieApi}/movies/:id`
+    const id = typeof this.movie === 'number' ? this.movie : this.movie.id;
+    const url = `${this.movieApi}/movies/`
 
-    return this.http.delete<any>(url, movieId)
+    return this.http.delete<any>(url, id)
       Swal.fire(
         {
           icon: 'success',
