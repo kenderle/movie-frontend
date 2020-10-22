@@ -1,12 +1,16 @@
+import Swal from 'sweetalert2';
+import { environment } from './../../../environments/environment';
 import { UserService } from './../../shared/services/user.service';
 import { map } from 'rxjs/operators';
 import { Review } from './../../shared/models/review';
 import { Movie } from './../../shared/models/movie';
 import { MovieService } from './../../shared/services/movie.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
+import { HttpClient } from '@angular/common/http';
+import { HTTPOptions } from 'aws-sdk/lib/config-base';
 
 @Component({
   selector: 'app-single-movie',
@@ -20,6 +24,9 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
   reviews: Review[]
   avgMovieRating = 0.0
   currentUser: User
+  private movieApi: string
+  private http: HttpClient
+  private httpOptions: HTTPOptions
   private subs = new Subscription()
 
   constructor(
@@ -29,6 +36,7 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.currentUser = this.userService.currentUserValue
+    this.movieApi = `${environment.apiUrl}api/v1/movies`
   }
 
   ngOnInit(): void {
@@ -79,11 +87,34 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
   }
 
   editMovie() {
-
+    const params = {
+      title: this.movie.title,
+      description: this.movie.description,
+      releaseDate: this.movie.release_date,
+      rating: this.movie.parental_rating,
+      totalGross: this.movie.total_gross,
+      duration: this.movie.duration,
+      cast: this.movie.cast,
+      director: this.movie.director
+    }
+    return this.http.patch<any>(`${this.movieApi}/update`, params)
   }
 
-  deleteMovie() {
+  deleteMovie(id: number) {
+    const id = typeof this.movie === 'number' ? this.movie : this.movie.id;
+    const url = `${this.movieApi}/movies/:id`
 
+    return this.http.delete.(Observable)<any>(url, this.httpOptions)
+      Swal.fire(
+        {
+          icon: 'success',
+          title: 'You\'ve asuccessfully deleted a movie!',
+          showConfirmButton: false,
+          timer: 2000
+        }
+      ).then(() => {
+        this.router.navigate([`./movies/`])
+      })
   }
 
   ngOnDestroy() {

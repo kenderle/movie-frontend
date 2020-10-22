@@ -35,7 +35,7 @@ export class MovieService {
 
 
 uploadMovieImage(file, name, accessKey, secretKey) {
-  const buf = Buffer.from(file.replace(/^data:image\/w+;base64,/, ''), 'base64')
+  const buf = Buffer.from(file.replace(/^data:image\/\w+;base64,/, ''), 'base64')
   const bucket = new S3({
     accessKeyId: accessKey,
     secretAccessKey: secretKey,

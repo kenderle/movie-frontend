@@ -35,6 +35,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'movies/:id/update',
+    component: SingleMovieComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'movies/:id',
     component: SingleMovieComponent,
     pathMatch: 'full'
