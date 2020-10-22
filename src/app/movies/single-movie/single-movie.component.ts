@@ -98,6 +98,16 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
       director: this.movie.director
     }
     return this.http.patch<any>(`${this.movieApi}/update`, params)
+    Swal.fire(
+      {
+        icon: 'success',
+        title: 'You\'ve successfully edited a movie!',
+        showConfirmButton: false,
+        timer: 2000
+      }
+    ).then(() => {
+      this.router.navigate([`./movies/`])
+    })
   }
 
   deleteMovie(id: number) {
