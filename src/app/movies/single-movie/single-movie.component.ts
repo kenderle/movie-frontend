@@ -97,34 +97,41 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
       cast: this.movie.cast,
       director: this.movie.director
     }
-    return this.http.patch<any>(`${this.movieApi}/update`, params)
-    Swal.fire(
-      {
-        icon: 'success',
-        title: 'You\'ve successfully edited a movie!',
-        showConfirmButton: false,
-        timer: 2000
-      }
-    ).then(() => {
-      this.router.navigate([`./movies/`])
-    })
+    this.subs.add(
+      this.movieService.editMovie(params).subscribe(data => {
+        if (data) {
+          debugger
+        }
+      }, error => {
+        if (error) {
+          console.error(error)
+        }
+      })
+    )
   }
 
   deleteMovie(id: number) {
-    const id = typeof this.movie === 'number' ? this.movie : this.movie.id;
-    const url = `${this.movieApi}/movies/`
-
-    return this.http.delete<any>(url, id)
-      Swal.fire(
-        {
-          icon: 'success',
-          title: 'You\'ve successfully deleted a movie!',
-          showConfirmButton: false,
-          timer: 2000
+    this.subs.add(
+      this.movieService.deleteMovie(id).subscribe(data => {
+        if (data) {
+          Swal.fire(
+            {
+              icon: 'success',
+              title: 'You\'ve successfully deleted a movie!',
+              showConfirmButton: false,
+              timer: 2000
+            }
+          ).then(() => {
+            this.router.navigate([`movies/`])
+          })
         }
-      ).then(() => {
-        this.router.navigate([`./movies/`])
+      }, error => {
+        if (error) {
+          console.error(error)
+        }
       })
+    )
+
   }
 
   ngOnDestroy() {

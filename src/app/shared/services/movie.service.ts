@@ -34,30 +34,38 @@ export class MovieService {
   }
 
 
-uploadMovieImage(file, name, accessKey, secretKey) {
-  const buf = Buffer.from(file.replace(/^data:image\/\w+;base64,/, ''), 'base64')
-  const bucket = new S3({
-    accessKeyId: accessKey,
-    secretAccessKey: secretKey,
-    region: 'us-east-2',
-  });
-  const params = {
-    Bucket: 'code-labs-one-movie-images',
-    Key: 'images/' + name,
-    Body: buf,
-    ACL: 'public-read',
-    ContentEncoding: 'base64',
-    ContentType: 'image/png'
-  };
-  bucket.upload(params, function (err, data) {
-    if (err) {
-      console.log('There was an error uploading your file: ', err)
-      return { success: false, error: err  }
-    } else {
-      console.log('Successfully uploaded file.', data)
-      return { success: true, file: data.location }
-    }
-  })
-}
+  uploadMovieImage(file, name, accessKey, secretKey) {
+    const buf = Buffer.from(file.replace(/^data:image\/\w+;base64,/, ''), 'base64')
+    const bucket = new S3({
+      accessKeyId: accessKey,
+      secretAccessKey: secretKey,
+      region: 'us-east-2',
+    });
+   const params = {
+      Bucket: 'code-labs-one-movie-images',
+      Key: 'images/' + name,
+      Body: buf,
+      ACL: 'public-read',
+      ContentEncoding: 'base64',
+      ContentType: 'image/png'
+    };
+    bucket.upload(params, function (err, data) {
+      if (err) {
+        console.log('There was an error uploading your file: ', err)
+        return { success: false, error: err  }
+      } else {
+        console.log('Successfully uploaded file.', data)
+        return { success: true, file: data.location }
+      }
+    })
+  }
+
+  deleteMovie(id: any) {
+    return this.http.delete<any>(`${this.movieApi}/${id}`)
+  }
+
+  editMovie(params: any) {
+    return this.http.patch<any>(`${this.movieApi}/update`, params)
+  }
 
 }
