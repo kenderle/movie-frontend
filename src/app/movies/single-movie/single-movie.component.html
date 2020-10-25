@@ -50,7 +50,7 @@
         <button class="btn btn-primary" (click)="routeToWriteReview()">Write Review
           <fa-icon [icon]="['fas', 'star']" size="sm" class="ml-2 text-white"></fa-icon>
         </button>
-        <button class="btn btn-primary ml-2" (click)="editMovie()">Edit Movie
+        <button class="btn btn-primary ml-2" (click)="routeToEditMovie()">Edit Movie
           <fa-icon [icon]="['fas', 'tools']" size="sm" class="ml-2 text-white"></fa-icon>
         </button>
         <button class="btn btn-primary ml-2" (click)="deleteMovie()">Delete Movie
@@ -60,7 +60,7 @@
       <div *ngIf="currentUser.id === movie.user_id" class="flex ml-auto">
         <div class="w-100 d-inline-flex">
           <div class="flex">
-            <button class="btn btn-outline-primary" (click)="editMovie()">Edit Movie
+            <button class="btn btn-outline-primary" (click)="routeToEditMovie()">Edit Movie
               <fa-icon [icon]="['fas', 'pen']" size="sm" class="ml-2"></fa-icon>
             </button>
           </div>

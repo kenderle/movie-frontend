@@ -86,28 +86,8 @@ export class SingleMovieComponent implements OnInit, OnDestroy {
     this.router.navigate([`reviews/${this.movie.id}/new`])
   }
 
-  editMovie() {
-    const params = {
-      title: this.movie.title,
-      description: this.movie.description,
-      releaseDate: this.movie.release_date,
-      rating: this.movie.parental_rating,
-      totalGross: this.movie.total_gross,
-      duration: this.movie.duration,
-      cast: this.movie.cast,
-      director: this.movie.director
-    }
-    this.subs.add(
-      this.movieService.editMovie(params).subscribe(data => {
-        if (data) {
-          debugger
-        }
-      }, error => {
-        if (error) {
-          console.error(error)
-        }
-      })
-    )
+  routeToEditMovie() {
+    this.router.navigate([`${this.movie.id}/edit`])
   }
 
   deleteMovie(id: number) {

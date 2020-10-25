@@ -1,3 +1,4 @@
+import { EditMovieComponent } from './movies/edit-movie/edit-movie.component';
 import { NewMovieComponent } from './movies/new-movie/new-movie.component';
 import { AddEditReviewComponent } from './reviews/add-edit-review/add-edit-review.component';
 import { MovieReviewsComponent } from './movies/movie-reviews/movie-reviews.component';
@@ -35,8 +36,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'movies/:id/update',
-    component: SingleMovieComponent,
+    path: 'movies/:id/edit',
+    component: EditMovieComponent,
     pathMatch: 'full'
   },
   {
