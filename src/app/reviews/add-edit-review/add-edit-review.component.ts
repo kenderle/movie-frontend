@@ -148,6 +148,30 @@ export class AddEditReviewComponent implements OnInit, OnDestroy {
     )
   }
 
+  deleteReview(id: number) {
+    this.subs.add(
+      this.reviewService.deleteReview(id).subscribe(data => {
+        if (data) {
+          Swal.fire(
+            {
+              icon: 'success',
+              title: 'You\'ve successfully deleted a review!',
+              showConfirmButton: false,
+              timer: 2000
+            }
+          ).then(() => {
+            this.router.navigate([`movies/`])
+          })
+        }
+      }, error => {
+        if (error) {
+          console.error(error)
+        }
+      })
+    )
+
+  }
+
   cancel() {
     this.router.navigate([`./movies/${this.movie.id}`])
   }

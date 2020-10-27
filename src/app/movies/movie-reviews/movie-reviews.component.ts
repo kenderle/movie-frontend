@@ -34,7 +34,6 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(movie => {
       if (movie && movie.id) {
         this.retrieveMovie(movie.id)
-
       }
     })
   }
@@ -44,7 +43,7 @@ export class MovieReviewsComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.movieService.getMovieById(params).subscribe(data => {
         if (data) {
-          console.log(data)
+          // console.log(data)
           this.movie = new Movie(data.movie) // map the return json movie to the movie model
           this.movieImg = this.movie.image // assign the movieImg
           if (data && data.reviews && data.reviews.length) { // check if there are reviews in the return json

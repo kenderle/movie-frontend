@@ -32,6 +32,7 @@ import { AddEditReviewComponent } from './reviews/add-edit-review/add-edit-revie
 import { NewMovieComponent } from './movies/new-movie/new-movie.component';
 import {ImageCropperModule } from 'ngx-image-cropper';
 import { EditMovieComponent } from './movies/edit-movie/edit-movie.component';
+import { EditReviewComponent } from './reviews/edit-review/edit-review.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { EditMovieComponent } from './movies/edit-movie/edit-movie.component';
     SingleReviewCardComponent,
     AddEditReviewComponent,
     NewMovieComponent,
-    EditMovieComponent
+    EditMovieComponent,
+    EditReviewComponent
   ],
   imports: [
     BrowserModule,
